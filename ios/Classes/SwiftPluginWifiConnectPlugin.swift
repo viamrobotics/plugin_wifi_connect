@@ -175,6 +175,7 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
             print("Removing ssid", ssid)
             NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: ssid)
           }
+          result(true)
       }
   }
     
