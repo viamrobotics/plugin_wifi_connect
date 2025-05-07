@@ -168,7 +168,7 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
     
   @available(iOS 11, *)
   private func disconnect(result: @escaping FlutterResult) {
-     // The original implementation attempted to disconnect from the currently connected network.
+      // The original implementation attempted to disconnect from the currently connected network.
       // This has been updated to remove all Wi-Fi configurations that have been set by this app.
       NEHotspotConfigurationManager.shared.getConfiguredSSIDs { ssids in
             if ssids.isEmpty {
