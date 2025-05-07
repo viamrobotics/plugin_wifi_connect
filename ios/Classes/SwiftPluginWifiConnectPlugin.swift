@@ -170,12 +170,18 @@ public class SwiftPluginWifiConnectPlugin: NSObject, FlutterPlugin {
   private func disconnect(result: @escaping FlutterResult) {
      // The original implementation attempted to disconnect from the currently connected network.
       // This has been updated to remove all Wi-Fi configurations that have been set by this app.
-            NEHotspotConfigurationManager.shared.getConfiguredSSIDs() { ssids in
-          for ssid in ssids {
-            print("Removing ssid", ssid)
-            NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: ssid)
+      NEHotspotConfigurationManager.shared.getConfiguredSSIDs() { ssids in
+      if ssids.isEmpty {
+        // returning false indicates there was nothing to remove
+        result(false)
+        } else {
+            for ssid in ssids {
+              print("Removing ssid", ssid)
+              NEHotspotConfigurationManager.shared.removeConfiguration(forSSID: ssid)
+            }
+            // returning true indicates that one or more app-configured SSIDs were found and an attempt was made to remove them.
+            result(true)
           }
-          result(true)
       }
   }
     
